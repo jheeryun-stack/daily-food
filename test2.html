@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html{font-size: 40px}</style>
+</head>
+<body>
+  <div class="container">
+    <h2>한 달 예산 계산기</h2>
+    <p>나는 한 달에 20만원으로 커피와 식사를 포함한 식비를 해결하려 한다.<br>
+    한 달이 30일이라고 했을 때, 매일 커피를 마신다면 하루 식사 예산은?</p>
+    
+    <input type="number" id="coffeePrice" placeholder="커피 가격 (원)">
+    <input type="number" id="monthlyBudget" placeholder="한 달 예산 (원)">
+    <input type="number" id="days" placeholder="일수 (예: 30)">
+    <br>
+    <button onclick="calculateBudget()">계산하기</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateBudget() {
+      // 변수 두 개: 커피 가격(coffeePrice), 한 달 예산(monthlyBudget)
+      let coffeePrice = document.getElementById("coffeePrice").value;
+      let monthlyBudget = document.getElementById("monthlyBudget").value;
+      let days = document.getElementById("days").value;
+
+      if (coffeePrice === "" || monthlyBudget === "" || days === "") {
+        document.getElementById("result").innerText = "값을 모두 입력하세요!";
+        return;
+      }
+
+      // 한 달 동안 커피에 쓰는 총 금액
+      let coffeeTotal = coffeePrice * days;
+
+      // 식사에 쓸 수 있는 전체 금액
+      let foodBudget = monthlyBudget - coffeeTotal;
+
+      // 하루 식사 예산
+      let dailyFood = (foodBudget / days).toFixed(0);
+
+      document.getElementById("result").innerText =
+        `👉 하루에 쓸 수 있는 최대 식사 비용은 ${dailyFood}원입니다.`;
+    }
+  </script>
+</body>
+</html>
